@@ -20,3 +20,7 @@ export const fetchToken = async (email: string, otp: string) => {
     body: JSON.stringify({email, otp})
   })
 }
+
+export const fetchApps = async () => {
+  return await fetch(`${BASE_URL}/v1/auth/get_apps`);
+}

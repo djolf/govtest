@@ -1,10 +1,12 @@
 import React, { FC } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.scss";
-import LoginPage from "./login";
+import LoginPage from "./login/LoginPage";
 import { SnackbarProvider } from "material-ui-snackbar-provider";
 import TopNav from "./nav/TopNav";
-import Dashboard from "./dashboard";
+import Dashboard from "./dashboard/Dashboard";
+import StaffProfile from "./staff_profile/StaffProfile";
+import userStore from "./util/userStore";
 
 function App() {
   return (
@@ -14,8 +16,7 @@ function App() {
           <Route
             path="/login"
             render={(props) => {
-              const isLoggedIn = !!sessionStorage.getItem("token");
-
+              const isLoggedIn = !!userStore.getToken();
               if (isLoggedIn) {
                 props.history.replace("/");
               }
@@ -25,8 +26,7 @@ function App() {
           <Route
             path="/logout"
             render={({ history }) => {
-              sessionStorage.removeItem("token");
-              sessionStorage.removeItem("apps");
+              userStore.clear();
               history.replace("/login" + window.location.hash);
               return null;
             }}
@@ -40,6 +40,7 @@ function App() {
                   <TopNav />
                   <div className="main">
                     <Switch>
+                      <Route path="/staff_profiles" component={StaffProfile} />
                       <Route path="/" component={Dashboard} />
                     </Switch>
                   </div>
@@ -57,6 +58,6 @@ export default App;
 
 export const LoginHandler: FC = ({ children }) => {
   //replace with actual login authentication
-  const isLoggedIn = !!sessionStorage.getItem("token");
+  const isLoggedIn = !!userStore.getToken();
   return isLoggedIn ? <>{children}</> : <Redirect to="/login" />;
 };

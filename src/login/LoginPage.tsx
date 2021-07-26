@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import BgImg from "../login_bg.png";
 import { fetchOtp, fetchToken } from "../util/authAPI";
+import userStore from "../util/userStore";
 import "./login.scss";
 
 const LoginPage = () => {
@@ -29,7 +30,6 @@ const LoginPage = () => {
       setStage("OTP");
     } else {
       snackbar.showMessage("GetOTP failed: " + data.detail);
-      setStage("OTP"); //go to next stage for now; to delete when APIs work
     }
   };
 
@@ -38,13 +38,11 @@ const LoginPage = () => {
     const data = await response.json();
     if (response.ok) {
       // set token, user info, permissions to sessionStorage
-      sessionStorage.setItem("token", data.jwt);
-      sessionStorage.setItem("apps", JSON.stringify(data.apps));
+      userStore.setStore(data);
       history.replace("/");
     } else {
       snackbar.showMessage("Login failed: " + data.detail);
-      sessionStorage.setItem("token", "random-token"); //to delete
-      history.replace("/");
+      history.replace("/login");
     }
   };
 

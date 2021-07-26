@@ -1,0 +1,29 @@
+.dashboard-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .MuiCard-root {
+    width: 30%;
+    min-width: 300px;
+    margin-bottom: 1em;
+    .MuiCardMedia-root {
+      height: 200px;
+    }
+    &.disabled {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .MuiButtonBase-root {
+        cursor: not-allowed !important;
+      }
+    }
+  }
+}
