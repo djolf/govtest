@@ -3,6 +3,8 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.scss";
 import LoginPage from "./login";
 import { SnackbarProvider } from "material-ui-snackbar-provider";
+import TopNav from "./nav/TopNav";
+import Dashboard from "./dashboard";
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
             path="/logout"
             render={({ history }) => {
               sessionStorage.removeItem("token");
-              sessionStorage.removeItem("username");
+              sessionStorage.removeItem("apps");
               history.replace("/login" + window.location.hash);
               return null;
             }}
@@ -32,14 +34,15 @@ function App() {
         </Switch>
         <LoginHandler>
           <Route
-            path="/"
             render={(props) => {
               return (
                 <>
-                  <h1>home page</h1>
-                  <button onClick={() => props.history.replace("/logout")}>
-                    logout
-                  </button>
+                  <TopNav />
+                  <div className="main">
+                    <Switch>
+                      <Route path="/" component={Dashboard} />
+                    </Switch>
+                  </div>
                 </>
               );
             }}

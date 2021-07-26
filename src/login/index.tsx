@@ -38,7 +38,8 @@ const LoginPage = () => {
     const data = await response.json();
     if (response.ok) {
       // set token, user info, permissions to sessionStorage
-      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.jwt);
+      sessionStorage.setItem("apps", JSON.stringify(data.apps));
       history.replace("/");
     } else {
       snackbar.showMessage("Login failed: " + data.detail);
@@ -117,11 +118,15 @@ const LoginPage = () => {
                 <div className="row">
                   <TextField
                     className="textfield"
+                    autoComplete="one-time-code"
                     required
                     type="text"
                     label="One-Time Password"
                     variant="outlined"
                     placeholder="OTP"
+                    inputProps={{
+                      maxLength: 6,
+                    }}
                     onChange={(e) => {
                       setOTP(e.target.value);
                     }}
