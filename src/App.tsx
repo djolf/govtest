@@ -15,10 +15,10 @@ function App() {
         <Switch>
           <Route
             path="/login"
-            render={(props) => {
+            render={() => {
               const isLoggedIn = !!userStore.getToken();
               if (isLoggedIn) {
-                props.history.replace("/");
+                return <Redirect to="/" />;
               }
               return <LoginPage />;
             }}

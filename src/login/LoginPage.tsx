@@ -1,14 +1,12 @@
 import { Button, CircularProgress, TextField } from "@material-ui/core";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import BgImg from "../login_bg.png";
 import { fetchOtp, fetchToken } from "../util/authAPI";
 import userStore from "../util/userStore";
 import "./login.scss";
 
 const LoginPage = () => {
-  const history = useHistory();
   const [stage, setStage] = useState("EMAIL");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -43,10 +41,10 @@ const LoginPage = () => {
     setLoading(false);
     if (response.ok) {
       userStore.setStore(data);
-      history.replace("/" + window.location.hash);
+      window.location.href = process.env.PUBLIC_URL + "/";
     } else {
       snackbar.showMessage("Login failed: " + data.detail);
-      history.replace("/login");
+      window.location.href = process.env.PUBLIC_URL + "/login";
     }
   };
 
@@ -74,7 +72,7 @@ const LoginPage = () => {
                 Enter your Email Address and we will send you a One-Time
                 Password (OTP) to enter below.
               </p>
-              <form noValidate autoComplete="off">
+              <div className="form-container">
                 <div className="row">
                   <TextField
                     className="textfield"
@@ -83,6 +81,9 @@ const LoginPage = () => {
                     label="Email"
                     variant="outlined"
                     placeholder="e.g. glenn@dsaid.gov.sg"
+                    onSubmit={() => {
+                      console.log("enter pressed");
+                    }}
                     onChange={(e) => {
                       setEmail(e.target.value);
                       validateEmail(e.target.value);
@@ -109,7 +110,7 @@ const LoginPage = () => {
                     <a href="#">Contact Us.</a>
                   </div>
                 </div>
-              </form>
+              </div>
             </>
           )}
           {stage === "OTP" && (
@@ -117,7 +118,7 @@ const LoginPage = () => {
               <p className="text">
                 An OTP has been emailed to you. Enter OTP below.
               </p>
-              <form noValidate autoComplete="off">
+              <div className="form-container">
                 <div className="row">
                   <TextField
                     className="textfield"
@@ -153,7 +154,7 @@ const LoginPage = () => {
                     RESEND OTP
                   </Button>
                 </div>
-              </form>
+              </div>
             </>
           )}
         </div>

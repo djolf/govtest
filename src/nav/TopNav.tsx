@@ -2,17 +2,15 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
 import "./TopNav.scss";
-import { useHistory } from "react-router-dom";
 
 const TopNav = () => {
-  const history = useHistory();
   return (
     <header>
       <div className="content">
         <div
           className="title"
           onClick={() => {
-            history.push("/");
+            window.location.href = process.env.PUBLIC_URL + "/";
           }}
         >
           CapDev<b>Portal</b>
@@ -23,7 +21,7 @@ const TopNav = () => {
             size="large"
             endIcon={<PowerSettingsNewRoundedIcon fontSize="inherit" />}
             onClick={() => {
-              history.replace("/logout");
+              window.location.href = process.env.PUBLIC_URL + "/logout";
             }}
           >
             Log Out

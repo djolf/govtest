@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { useHistory } from "react-router-dom";
 import userStore from "../util/userStore";
 
 interface IProps {
@@ -17,12 +16,11 @@ interface IProps {
 
 const ModuleCard = (props: IProps) => {
   const { title, img, name } = props;
-  const history = useHistory();
   return (
     <Card
       onClick={() => {
         if (userStore.hasPermission(name)) {
-          history.replace("/" + name);
+          window.location.href = process.env.PUBLIC_URL + "/" + name;
         }
       }}
       className={userStore.hasPermission(name) ? "" : "disabled"}
