@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/govtest/static/css/main.612b1ed1.chunk.css",
+    "main.js": "/govtest/static/js/main.d3f0913b.chunk.js",
+    "main.js.map": "/govtest/static/js/main.d3f0913b.chunk.js.map",
+    "runtime-main.js": "/govtest/static/js/runtime-main.2be9de78.js",
+    "runtime-main.js.map": "/govtest/static/js/runtime-main.2be9de78.js.map",
+    "static/js/2.3b185ab0.chunk.js": "/govtest/static/js/2.3b185ab0.chunk.js",
+    "static/js/2.3b185ab0.chunk.js.map": "/govtest/static/js/2.3b185ab0.chunk.js.map",
+    "static/js/3.da33fde1.chunk.js": "/govtest/static/js/3.da33fde1.chunk.js",
+    "static/js/3.da33fde1.chunk.js.map": "/govtest/static/js/3.da33fde1.chunk.js.map",
+    "index.html": "/govtest/index.html",
+    "static/css/main.612b1ed1.chunk.css.map": "/govtest/static/css/main.612b1ed1.chunk.css.map",
+    "static/js/2.3b185ab0.chunk.js.LICENSE.txt": "/govtest/static/js/2.3b185ab0.chunk.js.LICENSE.txt",
+    "static/media/login.scss": "/govtest/static/media/login_bg.482d8066.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2be9de78.js",
+    "static/js/2.3b185ab0.chunk.js",
+    "static/css/main.612b1ed1.chunk.css",
+    "static/js/main.d3f0913b.chunk.js"
+  ]
+}
