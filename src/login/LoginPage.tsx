@@ -37,9 +37,8 @@ const LoginPage = () => {
     const response = await fetchToken(email, OTP);
     const data = await response.json();
     if (response.ok) {
-      // set token, user info, permissions to sessionStorage
       userStore.setStore(data);
-      history.replace("/");
+      history.replace("/" + window.location.hash);
     } else {
       snackbar.showMessage("Login failed: " + data.detail);
       history.replace("/login");
@@ -123,7 +122,7 @@ const LoginPage = () => {
                     variant="outlined"
                     placeholder="OTP"
                     inputProps={{
-                      maxLength: 6,
+                      maxLength: 5,
                     }}
                     onChange={(e) => {
                       setOTP(e.target.value);

@@ -27,8 +27,8 @@ function App() {
             path="/logout"
             render={({ history }) => {
               userStore.clear();
-              history.replace("/login" + window.location.hash);
-              return null;
+              // history.replace("/login");
+              return <Redirect to="/login" />;
             }}
           />
         </Switch>
