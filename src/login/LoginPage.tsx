@@ -1,4 +1,4 @@
-import { Button, TextField } from "@material-ui/core";
+import { Button, CircularProgress, TextField } from "@material-ui/core";
 import { useSnackbar } from "material-ui-snackbar-provider";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -14,6 +14,7 @@ const LoginPage = () => {
   const [emailError, setEmailError] = useState(false);
   const [OTP, setOTP] = useState("");
   const snackbar = useSnackbar();
+  const [loading, setLoading] = useState(false);
 
   const validateEmail = (str: string) => {
     if (/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/.test(str.toUpperCase())) {
@@ -24,8 +25,10 @@ const LoginPage = () => {
   };
 
   const getOtp = async () => {
+    setLoading(true);
     const response = await fetchOtp(email);
     const data = await response.json();
+    setLoading(false);
     if (response.ok) {
       setStage("OTP");
     } else {
@@ -34,8 +37,10 @@ const LoginPage = () => {
   };
 
   const getToken = async () => {
+    setLoading(true);
     const response = await fetchToken(email, OTP);
     const data = await response.json();
+    setLoading(false);
     if (response.ok) {
       userStore.setStore(data);
       history.replace("/" + window.location.hash);
@@ -95,7 +100,8 @@ const LoginPage = () => {
                     disabled={email.length === 0 || emailError}
                     onClick={() => getOtp()}
                   >
-                    <b>GET OTP</b>
+                    <b>GET OTP</b>&nbsp;
+                    {loading && <CircularProgress size={24} color="inherit" />}
                   </Button>
                   <div className="text register">
                     <span>Not a registered user yet?</span>
@@ -136,7 +142,8 @@ const LoginPage = () => {
                     variant="contained"
                     onClick={() => getToken()}
                   >
-                    <b>LOGIN</b>
+                    <b>LOGIN</b>&nbsp;
+                    {loading && <CircularProgress size={24} color="inherit" />}
                   </Button>
                   <Button
                     className="resend"

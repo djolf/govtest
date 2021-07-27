@@ -140,6 +140,10 @@ const StaffProfile = () => {
     ];
   };
 
+  const removeBlanks = (arr: string[]) => {
+    return arr.filter((item) => item !== "");
+  };
+
   return (
     <div className="staff-profile-container">
       <div className="title">Staff Profile Fetcher</div>
@@ -181,14 +185,14 @@ const StaffProfile = () => {
       )}
       {activeStep === 1 &&
         results &&
-        (!!results.missing_emails.length ||
-          !!results.missing_emp_nums.length) && (
+        (!!removeBlanks(results.missing_emails).length ||
+          !!removeBlanks(results.missing_emp_nums).length) && (
           <div className="error-results-container">
             <div className="error-text">
               List of emails and/or employee numbers not found
             </div>
             <div className="error-table-container">
-              {!!results.missing_emails.length && (
+              {!!removeBlanks(results.missing_emails).length && (
                 <div className="error-table">
                   <div className="error-header">Email Address</div>
                   {results.missing_emails.map((email) => (
@@ -198,7 +202,7 @@ const StaffProfile = () => {
                   ))}
                 </div>
               )}
-              {!!results.missing_emp_nums.length && (
+              {!!removeBlanks(results.missing_emp_nums).length && (
                 <div className="error-table">
                   <div className="error-header">Employee No.</div>
                   {results.missing_emp_nums.map((empNo) => (

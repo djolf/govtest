@@ -11,7 +11,7 @@ import userStore from "./util/userStore";
 function App() {
   return (
     <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route
             path="/login"
@@ -25,16 +25,15 @@ function App() {
           />
           <Route
             path="/logout"
-            render={({ history }) => {
+            render={() => {
               userStore.clear();
-              // history.replace("/login");
               return <Redirect to="/login" />;
             }}
           />
         </Switch>
         <LoginHandler>
           <Route
-            render={(props) => {
+            render={() => {
               return (
                 <>
                   <TopNav />
