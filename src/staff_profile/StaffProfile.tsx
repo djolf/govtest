@@ -1,5 +1,4 @@
 import {
-  Backdrop,
   Button,
   CircularProgress,
   Step,
@@ -9,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import { GetApp } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { fetchCSV, fetchProfiles } from "../util/profileAPI";
 import "./staffprofile.scss";
 
